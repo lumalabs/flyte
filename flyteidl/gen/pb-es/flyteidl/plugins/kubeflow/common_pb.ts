@@ -33,6 +33,55 @@ proto3.util.setEnumType(CleanPodPolicy, "flyteidl.plugins.kubeflow.CleanPodPolic
 ]);
 
 /**
+ * @generated from message flyteidl.plugins.kubeflow.SchedulingPolicy
+ */
+export class SchedulingPolicy extends Message<SchedulingPolicy> {
+  /**
+   * @generated from field: string queue = 1;
+   */
+  queue = "";
+
+  /**
+   * @generated from field: string priority_class = 2;
+   */
+  priorityClass = "";
+
+  /**
+   * @generated from field: int32 min_available = 3;
+   */
+  minAvailable = 0;
+
+  constructor(data?: PartialMessage<SchedulingPolicy>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flyteidl.plugins.kubeflow.SchedulingPolicy";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "queue", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "priority_class", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "min_available", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SchedulingPolicy {
+    return new SchedulingPolicy().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SchedulingPolicy {
+    return new SchedulingPolicy().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SchedulingPolicy {
+    return new SchedulingPolicy().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SchedulingPolicy | PlainMessage<SchedulingPolicy> | undefined, b: SchedulingPolicy | PlainMessage<SchedulingPolicy> | undefined): boolean {
+    return proto3.util.equals(SchedulingPolicy, a, b);
+  }
+}
+
+/**
  * @generated from message flyteidl.plugins.kubeflow.RunPolicy
  */
 export class RunPolicy extends Message<RunPolicy> {
@@ -65,6 +114,13 @@ export class RunPolicy extends Message<RunPolicy> {
    */
   backoffLimit = 0;
 
+  /**
+   * Scheduling policy to control priorities and queues
+   *
+   * @generated from field: flyteidl.plugins.kubeflow.SchedulingPolicy scheduling_policy = 5;
+   */
+  schedulingPolicy?: SchedulingPolicy;
+
   constructor(data?: PartialMessage<RunPolicy>) {
     super();
     proto3.util.initPartial(data, this);
@@ -77,6 +133,7 @@ export class RunPolicy extends Message<RunPolicy> {
     { no: 2, name: "ttl_seconds_after_finished", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 3, name: "active_deadline_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 4, name: "backoff_limit", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 5, name: "scheduling_policy", kind: "message", T: SchedulingPolicy },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RunPolicy {

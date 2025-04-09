@@ -125,6 +125,14 @@ build_native_flyte:
 	--build-arg FLYTECONSOLE_VERSION=$(FLYTECONSOLE_VERSION) \
 	--tag flyte-binary:native .
 
+.PHONY: build_linux_flyte
+build_linux_flyte: FLYTECONSOLE_VERSION := latest
+build_linux_flyte:
+	docker build \
+	--build-arg FLYTECONSOLE_VERSION=$(FLYTECONSOLE_VERSION) \
+	--platform=linux/amd64 \
+	--tag flyte-binary:linux .
+
 .PHONY: go-tidy
 go-tidy:
 	go mod tidy
