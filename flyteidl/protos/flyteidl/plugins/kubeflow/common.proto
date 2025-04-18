@@ -34,4 +34,7 @@ message RunPolicy {
 
     // Scheduling policy to control priorities and queues
     SchedulingPolicy scheduling_policy = 5;
+
+    // Suspend job execution
+    bool suspend = 6;
 }

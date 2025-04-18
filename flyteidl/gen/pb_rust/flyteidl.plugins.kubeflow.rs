@@ -29,6 +29,9 @@ pub struct RunPolicy {
     /// Scheduling policy to control priorities and queues
     #[prost(message, optional, tag="5")]
     pub scheduling_policy: ::core::option::Option<SchedulingPolicy>,
+    /// Suspend job execution
+    #[prost(bool, tag="6")]
+    pub suspend: bool,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

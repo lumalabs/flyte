@@ -121,6 +121,13 @@ export class RunPolicy extends Message<RunPolicy> {
    */
   schedulingPolicy?: SchedulingPolicy;
 
+  /**
+   * Suspend job execution
+   *
+   * @generated from field: bool suspend = 6;
+   */
+  suspend = false;
+
   constructor(data?: PartialMessage<RunPolicy>) {
     super();
     proto3.util.initPartial(data, this);
@@ -134,6 +141,7 @@ export class RunPolicy extends Message<RunPolicy> {
     { no: 3, name: "active_deadline_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 4, name: "backoff_limit", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 5, name: "scheduling_policy", kind: "message", T: SchedulingPolicy },
+    { no: 6, name: "suspend", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RunPolicy {

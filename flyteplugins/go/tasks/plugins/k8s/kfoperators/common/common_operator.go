@@ -233,6 +233,10 @@ func ParseRunPolicy(flyteRunPolicy kfplugins.RunPolicy) kubeflowv1.RunPolicy {
 	}
 	var schedulingPolicy = ParseSchedulingPolicy(flyteRunPolicy.GetSchedulingPolicy())
 	runPolicy.SchedulingPolicy = schedulingPolicy
+	if flyteRunPolicy.GetSuspend() != false {
+		var suspend = flyteRunPolicy.GetSuspend()
+		runPolicy.Suspend = &suspend
+	}
 
 	return runPolicy
 }
