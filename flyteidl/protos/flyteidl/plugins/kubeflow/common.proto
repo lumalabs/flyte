@@ -12,6 +12,12 @@ enum CleanPodPolicy {
     CLEANPOD_POLICY_ALL = 2;
 }
 
+message SchedulingPolicy {
+    string queue = 1;
+    string priority_class = 2;
+    int32 min_available = 3;
+}
+
 message RunPolicy {
     // Defines the policy to kill pods after the job completes. Default to None.
     CleanPodPolicy clean_pod_policy = 1;
@@ -25,4 +31,10 @@ message RunPolicy {
 
     // Number of retries before marking this job failed.
     int32 backoff_limit = 4;
+
+    // Scheduling policy to control priorities and queues
+    SchedulingPolicy scheduling_policy = 5;
+
+    // Suspend job execution
+    bool suspend = 6;
 }

@@ -231,8 +231,36 @@ func ParseRunPolicy(flyteRunPolicy kfplugins.RunPolicy) kubeflowv1.RunPolicy {
 		var ttl = flyteRunPolicy.GetTtlSecondsAfterFinished()
 		runPolicy.TTLSecondsAfterFinished = &ttl
 	}
+	var schedulingPolicy = ParseSchedulingPolicy(flyteRunPolicy.GetSchedulingPolicy())
+	runPolicy.SchedulingPolicy = schedulingPolicy
+	if flyteRunPolicy.GetSuspend() != false {
+		var suspend = flyteRunPolicy.GetSuspend()
+		runPolicy.Suspend = &suspend
+	}
 
 	return runPolicy
+}
+
+// ParseSchedulingPolicy converts a kubeflow plugin SchedulingPolicy object to a k8s SchedulingPolicy object.
+func ParseSchedulingPolicy(flyteSchedulingPolicy *kfplugins.SchedulingPolicy) *kubeflowv1.SchedulingPolicy {
+	if flyteSchedulingPolicy == nil {
+		return nil
+	}
+	schedulingPolicy := &kubeflowv1.SchedulingPolicy{}
+	if flyteSchedulingPolicy.GetQueue() != "" {
+		var queue = flyteSchedulingPolicy.GetQueue()
+		schedulingPolicy.Queue = queue
+	}
+	if flyteSchedulingPolicy.GetPriorityClass() != "" {
+		var priorityClass = flyteSchedulingPolicy.GetPriorityClass()
+		schedulingPolicy.PriorityClass = priorityClass
+	}
+	if flyteSchedulingPolicy.GetMinAvailable() != 0 {
+		var minAvailable = flyteSchedulingPolicy.GetMinAvailable()
+        schedulingPolicy.MinAvailable = &minAvailable
+	}
+
+	return schedulingPolicy
 }
 
 // Get k8s clean pod policy from flyte kubeflow plugins clean pod policy.
